@@ -1,3 +1,169 @@
 # CSC324 at Georgetown College
 
 This is where I am storing my work for this class.
+// CHAPTER 2 IN THE TXTBK NOTES
+// let and var are the main two we will be using for the variables in javascript
+//the way in which we will do the setup is specifcally that of the let function
+// Before the BINDING NAMES sectiion Homer did a quick example of the const function, this function isnt one we will be using for right now.
+//IF you try to change the name when using the const function you will get an error
+// THERE is a list of reserve words we can't use because its case sensitive HOWEVER we are not obligated to memorize this 
+// the console.log we won't be runing this in the console we will be running it in the node for right now
+// Conditional Execution section is the flow control section in the csc115 txtbk 
+// Recall that the NaN stands for Not A Number
+// THIS applies to that of ifelse statements under the conditional execution section: The braces can be used to group any number of statements into a single statement, called a block. 
+//The while looping is preferred to that of the for under the txtbk's explanation for flow control (different types)
+// IN ORDER FOR THE CODES PROVIDED TO WORK IN THE TXTBK click command and return at the same time
+//FRIENDLY REMINDER OF THE PREVIOUS STATEMENTS: A statement starting with the keyword while creates a loop. The word while is followed by an expression in parentheses and then a statement, much like if. The loop keeps entering that statement as long as the expression produces a value that gives true when converted to Boolean.
+// AS STATED IN THE TXTBK SINCE THIS IS NEW: A do loop is a control structure similar to a while loop. It differs only on one point: a do loop always executes its body at least once, and it starts testing whether it should stop only after that first execution. To reflect this, the test appears after the body of the loop.
+// 
+let yourName;
+do {
+  yourName = prompt("Who are you?");
+} while (!yourName);
+console.log(yourName);
+
+//This program will force you to enter a name. It will ask again and again until it gets something that is not an empty string. Applying the ! operator will convert a value to Boolean type before negating it, and all strings except "" convert to true. This means the loop continues going round until you provide a non-empty name. The top code is an e.g. we can learn from.
+
+// The remainders will need to use the % sign that we typically would use as modulise!!!
+// RECALL THE CAPS CASE that you use when writing in javascript they prefer camel over the (Rsnake)
+// const square = function(x) {
+  return x * x;
+};
+
+console.log(square(12));
+// → 144
+
+
+// THIS EXAMPLE IS A FUNCTION THAT HAS MULTI
+// AND NO PARAMETERS
+const makeNoise = function() {
+  console.log("Pling!");
+};
+
+makeNoise();
+// → Pling!
+
+const power = function(base, exponent) {
+  let result = 1;
+  for (let count = 0; count < exponent; count++) {
+    result *= base;
+  }
+  return result;
+};
+
+console.log(power(2, 10));
+// → 1024
+
+//Each binding has a scope, which is the part of the program in which 
+//the binding is visible. For bindings defined outside of any function 
+//or block, the scope is the whole program—you can refer to such bindings
+// wherever you want. These are called global.
+
+//But bindings created for function parameters or declared inside a function
+// can be referenced only in that function, so they are known as local bindings.
+// Every time the function is called, new instances of these bindings are created.
+// This provides some isolation between functions—each function call acts in its own 
+//little world (its local environment) and can often be understood without knowing a 
+//lot about what’s going on in the global environment.
+
+//Bindings declared with let and const are in fact local
+//to the block that they are declared in, so if you create one
+//of those inside of a loop, the code before and after the loop 
+//cannot “see” it. In pre-2015 JavaScript, only functions created 
+//new scopes, so old-style bindings, created with the var keyword, are 
+//visible throughout the whole function that they appear in—or throughout
+//the global scope, if they are not in a function.
+
+let x = 10;
+if (true) {
+  let y = 20;
+  var z = 30;
+  console.log(x + y + z);
+  // → 60
+}
+// y is not visible here
+console.log(x + z);
+// → 40
+
+//The set of bindings visible inside a block is determined by the
+// place of that block in the program text. Each local scope can also
+// see all the local scopes that contain it, and all scopes can see the global scope. 
+//This approach to binding visibility is called lexical scoping.
+
+//Take your result to multiply with the base ; this is what the function is doing
+const power = (base, exponent) => {
+  let result = 1;
+  for (let count = 0; count < exponent; count++) {
+    result *= base;
+  }
+  return result;
+};
+//specifically the line 97
+//The arrow comes after the list of parameters and is followed by the function’s body. 
+//It expresses something like “this input (the parameters) produces this result (the body)”.
+
+//When there is only one parameter name, you can omit the parentheses around the parameter 
+//list. If the body is a single expression, rather than a block in braces, that expression 
+//will be returned from the function. So, these two definitions of square do the same thing:
+
+
+const square1 = (x) => { return x * x; };
+const square2 = x => x * x;
+When an arrow function has no parameters at all, its parameter list is just an empty set of parentheses.
+
+const horn = () => {
+  console.log("Toot");
+};
+
+//The upside is that this behavior can be used to allow a function to be called with different numbers of arguments. 
+//For example, this minus function tries to imitate the - operator by acting on either one or two arguments:
+
+function minus(a, b) {
+  if (b === undefined) return -a;
+  else return a - b;
+}
+
+console.log(minus(10));
+// → -10
+console.log(minus(10, 5));
+// → 5
+
+//The tiny arrows that are underneath the console.log is the answer of the function
+// IF YOU want to compare essentially two variables use ===
+//This was explained in the rstudio as well
+
+
+//this is showing a function that creates a local binding.
+//Returning anything that is local binding only.
+function wrapValue(n) {
+  let local = n;
+  return () => local;
+}
+
+let wrap1 = wrapValue(1);
+let wrap2 = wrapValue(2);
+console.log(wrap1());
+// → 1
+console.log(wrap2());
+// → 2
+
+
+//this is similar to the clownmaker function we did in cscs215
+//It is perfectly okay for a function to call itself, as long as it 
+//doesn’t do it so often that it overflows the stack. A function that 
+//calls itself is called recursive. Recursion allows some functions to 
+//be written in a different style. 
+
+//This is essentially the way in which we need to go over majority of what we do in javascript!!!!!!!!
+//REWORK on recursive!!!!!!!!!!!!!
+
+//holding a binding to the value is what line 23 stands for
+
+
+//The example that we have essentially of the recursion learned of 
+//trying to understand the odd and even rule
+// we use the -2 as opposed to -1 because it wont go immediately to 1
+//the base case will have two parts when making the function.
+// return( function - 2)
+
+console.log("abcd"[3]);
