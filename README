@@ -167,3 +167,219 @@ console.log(wrap2());
 // return( function - 2)
 
 console.log("abcd"[3]);
+
+let doh = "Doh";
+console.log(typeof  doh.toUpperCase);
+
+console.log(doh.toUpperCase());
+
+let doh = "Doh";
+console.log(typeof doh.toUpperCase);
+
+console.log(doh.toUpperCase());
+
+console.log(doh.toLowerCase());
+console.log(nums.reverse());
+//the reverse application is used for arrays only
+// In HW for this chapter think about using this on the reverse arrays problem
+
+
+let nums = [3,7, -4]
+console.log(nums[1]);
+console.log(nums["1"]);
+// arrays have properties that are special!!
+//Meaning that arrays are considered by default to be case sensitive as well
+
+let sequence = [1,2,3];
+sequence.push(4);
+sequence.push(5);
+console.log(sequence);
+// The result was that is added 5 to the array
+
+console.log(sequence.pop());
+// The result is the same like the above except it shows the number being added on to the end
+
+console.log(sequence);
+// this showed the numbers involved in the array only
+
+//THE LYCANTHROPES LOG EXAMPLE
+
+let journal = [];
+function addEntry(events, squirrel){
+  journal.push({events, squirrel});
+}
+//the elipses are not part of this language in the problem
+//so do not expect this to show up in your code, it is only for the sake
+//of this specific problem!!!
+
+let object1 = {value:10};
+let object2 = object1;
+let object3 = {value:10};
+
+console.log(object1 == object2);
+
+console.log(object1 == object3);
+
+object1.value = 15;
+console.log(object2.value);
+console.log(object3.value);
+// == is the search for strict identity not to be considered 
+// as the typical equal like we learned in chapter 2; its its own 
+// individual identity when we are dealing with this type of problems
+
+
+let anObject = {left: 1, right: 2};
+console.log("left" in anObject);
+
+console.log(anObject);
+console.log(anObject.left);
+
+console.log("left" in anObject);
+
+console.log("right" in anObject);
+
+let journal = [
+  {events: ["work", "touched tree", "pizza", 
+            "running", "television"]
+    squirrel: false},
+  {events: ["work", "ice cream", "cauliflower", "lasagna", 
+            "touched tree", "brushed teeth"],
+    squirrel: false},
+  {events: ["weekend", "cycling", "break", "peanuts", "beer"],
+    squirrel: true},
+];
+//This arrays and any other array can be looked at as lists like in csc215
+
+let descriptions = {
+  work: "Went to work",
+  "touched tree": "Touched a tree"
+};
+// Line 254 and 255 are both considered properties regardless if viewed as strings
+
+let day1 = {
+  squirrel: false,
+  events: ["work", "touched tree", "pizza", "running"]
+};
+console.log(day1.squirrel);
+console.log(day1.wolf);
+day1.wolf = false;
+console.log(day1.wolf);
+// the arrow syntax for the function does not allow for object oriented uses!!!!!!!!!!!!!!!!!!
+
+
+
+function countChar(str, char, count = 0) {
+  if (str.length == 0) {
+    return count;
+  }
+  if (str[0] == char) {
+    count += 1;
+  }
+  let smallerStr = str.slice(1);
+  return countChar(smallerStr, char, count);
+}
+
+console.log(
+  countChar(
+    "bamboozle",
+    "o"
+  )
+);
+
+// with loop, to show debugging:
+function countCharLoop(str, char) {
+  let count = 0;
+  while (str.length > 0) {
+    if (str[0] == char) {
+      count += 1;
+    }
+    str = str.slice(1);
+  }
+  return count;
+}
+
+console.log(
+  countCharLoop(
+    "bamboozle",
+    "o"
+  )
+);
+
+function filter(array, test) {
+  let passed = [];
+  for (let element of array) {
+    if (test(element)) {
+      passed.push(element);
+    }
+  }
+  return passed;
+}
+
+console.log(filter(SCRIPTS, script => script.living));
+// We see that element of array is valid when we dont know what array we want to define yet
+// because we have array in the parameter
+//The function uses the argument named test, a function value, to fill a “gap” in the computation—the process of deciding which elements to collect.
+// Note how the filter function, rather than deleting elements from the existing array, builds up a new array with only the elements that pass the 
+//test. This function is pure. It does not modify the array it is given.
+
+function map(array, transform) {
+  let mapped = [];
+  for (let element of array) {
+    mapped.push(transform(element));
+  }
+  return mapped;
+}
+
+let rtlScripts = SCRIPTS.filter(s => s.direction == "rtl");
+console.log(map(rtlScripts, s => s.name));
+// map is a standard array method. The new array will have the same length as the input array,
+// but its content will have been mapped to a new form by the function
+
+function reduce(array, combine, start) {
+  let current = start;
+  for (let element of array) {
+    current = combine(current, element);
+  }
+  return current;
+}
+
+console.log(reduce([1, 2, 3, 4], (a, b) => a + b, 0));
+//function is a little less straightforward than filter and map, so take a close look at it:
+
+//the reduce of an array in grouping or in that add
+//2+(7+5)
+// adding the nunbers all at once
+
+function average(array) {
+  return array.reduce((a, b) => a + b) / array.length;
+}
+
+console.log(Math.round(average(
+  SCRIPTS.filter(s => s.living).map(s => s.year))));
+// → 1165
+console.log(Math.round(average(
+  SCRIPTS.filter(s => !s.living).map(s => s.year))));
+
+//the reduce method could be used in countChar example
+
+function characterScript(code) {
+  for (let script of SCRIPTS) {
+    if (script.ranges.some(([from, to]) => {
+      return code >= from && code < to;
+    })) {
+      return script;
+    }
+  }
+  return null;
+}
+
+console.log(characterScript(121));
+// this is finding Remember that each script has an array of 
+//character code ranges associated with it. So given a character code, we could use a function like this to find the corresponding script.
+
+// The ? and : combing it together will be an ifelse statement for a boolean
+
+//each emoji counts as two strings, utf16 world!!!!
+// difficult to create and maintain that overtime
+
+//
